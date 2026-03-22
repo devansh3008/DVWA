@@ -33,7 +33,7 @@ if( isset( $_POST[ 'create_db' ] ) ) {
 	}
 }
 
-// Anti-CSRF
+// Anti-CSRF TOKEN
 generateSessionToken();
 
 $database_type_name = "Unknown - The site is probably now broken";
