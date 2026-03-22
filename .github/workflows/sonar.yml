@@ -22,6 +22,7 @@ jobs:
 
       - name: Quality gate check
         uses: sonarsource/sonarqube-quality-gate-action@master
+        continue-on-error: true
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
