@@ -24,5 +24,4 @@ jobs:
             -v "$PWD:/pwd" \
             trufflesecurity/trufflehog:latest \
             git file:///pwd \
-            --only-verified \
             --fail
