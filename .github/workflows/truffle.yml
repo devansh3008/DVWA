@@ -5,6 +5,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  schedule:
+    - cron: "0 0 * * 1"
 
 jobs:
   trufflehog:
@@ -19,9 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: TruffleHog scan
-        run: |
-          docker run --rm \
-            -v "$PWD:/pwd" \
-            trufflesecurity/trufflehog:latest \
-            git file:///pwd \
-            --fail
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          extra_args: --only-verified
