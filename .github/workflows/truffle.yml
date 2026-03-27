@@ -5,8 +5,6 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-  schedule:
-    - cron: "0 0 * * 1"       # every Monday
 
 jobs:
   trufflehog:
@@ -21,9 +19,10 @@ jobs:
           fetch-depth: 0
 
       - name: TruffleHog scan
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          base: ${{ github.event.repository.default_branch }}
-          head: HEAD
-          extra_args: --only-verified
+        run: |
+          docker run --rm \
+            -v "$PWD:/pwd" \
+            trufflesecurity/trufflehog:latest \
+            git file:///pwd \
+            --only-verified \
+            --fail
